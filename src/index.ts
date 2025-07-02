@@ -39,6 +39,15 @@ app.put("/users/:id", (req: Request, res: Response) => {
         message: `Antigo usuario -> ${users[indexOfUser].name} alterado para -> 
         ${user.name} email atualizado de ${users[indexOfUser].email} para -> ${user.email}`
     });
+});
+
+app.delete("/users/:id", (req: Request, res: Response) => {
+    let userId: number = Number(req.params.id);
+    let indexOfUser: number = users.findIndex((_user: User) => _user.id === userId);
+    users.splice(indexOfUser, 1);
+    res.send({
+        message: `Usuario removido com sucesso`
+    });
 })
 
 app.post("/users", (req: Request, res: Response) => {

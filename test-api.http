@@ -1,0 +1,23 @@
+### Listar todos usuários
+GET http://localhost:3000/users
+
+### Buscar usuário específico
+GET http://localhost:3000/users/1
+
+### Criar novo usuário
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "João Silva",
+  "email": "joao@exemplo.com"
+}
+
+### Atualizar usuário
+PUT http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+  "name": "João Silva Atualizado",
+  "email": "joao.novo@exemplo.com"
+}
