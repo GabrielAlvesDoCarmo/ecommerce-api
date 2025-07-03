@@ -1,4 +1,4 @@
-import express, {Request, Response} from 'express';
+import {Request, Response} from 'express';
 let userRegistered: number = 0;
 let id: number = 1;
 

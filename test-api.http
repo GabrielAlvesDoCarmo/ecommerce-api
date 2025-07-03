@@ -21,3 +21,6 @@ Content-Type: application/json
   "name": "João Silva Atualizado",
   "email": "joao.novo@exemplo.com"
 }
+
+### Delete User
+DELETE http://localhost:3000/users/1
