@@ -10,6 +10,6 @@ userRouter.get("/users/:id", UsersController.getById);
 //Put change data user
 userRouter.put("/users/:id",UsersController.change);
 // Post send user
-userRouter.post("/users", UsersController.create);
+userRouter.post("/users", UsersController.save);
 //Delete user
 userRouter.delete("/users/:id",UsersController.delete)
