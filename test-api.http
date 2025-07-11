@@ -13,6 +13,14 @@ Content-Type: application/json
   "email": "joao@exemplo.com"
 }
 
+### Criar novo usuário com erro de email obrigatorio
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "João Silva"
+}
+
 ### Atualizar usuário
 PUT http://localhost:3000/users/1
 Content-Type: application/json
