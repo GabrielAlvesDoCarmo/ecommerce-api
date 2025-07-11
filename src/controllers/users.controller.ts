@@ -1,6 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
 import {getFirestore} from "firebase-admin/firestore";
 import {ValidationError} from "../errors/validation.error";
+import {NotFoundError} from "../errors/not-found.error";
 
 type User = {
     id: number;
@@ -25,7 +26,11 @@ export class UsersController {
         try {
             let userId: string = req.params.id;
             const doc = await getFirestore().collection('users').doc(userId).get();
-            res.send({id: doc.id, ...doc.data()})
+            if (doc.exists){
+                res.send({id: doc.id, ...doc.data()})
+            }else {
+                throw new NotFoundError("Usuario não encontrado")
+            }
         }catch (error) {
             next(error);
         }
