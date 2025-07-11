@@ -2,7 +2,10 @@
 GET http://localhost:3000/users
 
 ### Buscar usuário específico
-GET http://localhost:3000/users/1
+GET http://localhost:3000/users/zhnqapSV65g9irr0luaE
+
+### Buscar usuário específico erro not found
+GET http://localhost:3000/users/naoexisteoid
 
 ### Criar novo usuário
 POST http://localhost:3000/users
@@ -22,7 +25,16 @@ Content-Type: application/json
 }
 
 ### Atualizar usuário
-PUT http://localhost:3000/users/1
+PUT http://localhost:3000/users/0cQB2kB2OLLJnMM7wX2y
+Content-Type: application/json
+
+{
+  "name": "João Silva Atualizado",
+  "email": "joao.novo@exemplo.com"
+}
+
+### Atualizar usuário erro not found
+PUT http://localhost:3000/users/idnaoexiste
 Content-Type: application/json
 
 {

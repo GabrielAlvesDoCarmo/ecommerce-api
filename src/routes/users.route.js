@@ -9,7 +9,7 @@ exports.userRouter.get("/users", users_controller_1.UsersController.getAll);
 //Get user for id
 exports.userRouter.get("/users/:id", users_controller_1.UsersController.getById);
 //Put change data user
-exports.userRouter.put("/users/:id", users_controller_1.UsersController.change);
+exports.userRouter.put("/users/:id", users_controller_1.UsersController.update);
 // Post send user
 exports.userRouter.post("/users", users_controller_1.UsersController.save);
 //Delete user

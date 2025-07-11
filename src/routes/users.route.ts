@@ -8,7 +8,7 @@ userRouter.get("/users", UsersController.getAll);
 //Get user for id
 userRouter.get("/users/:id", UsersController.getById);
 //Put change data user
-userRouter.put("/users/:id",UsersController.change);
+userRouter.put("/users/:id",UsersController.update);
 // Post send user
 userRouter.post("/users", UsersController.save);
 //Delete user

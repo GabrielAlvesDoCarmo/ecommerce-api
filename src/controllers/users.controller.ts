@@ -17,7 +17,7 @@ export class UsersController {
                 return {id: doc.id, ...doc.data()};
             })
             res.send(users)
-        }catch (error) {
+        } catch (error) {
             next(error);
         }
     }
@@ -26,45 +26,50 @@ export class UsersController {
         try {
             let userId: string = req.params.id;
             const doc = await getFirestore().collection('users').doc(userId).get();
-            if (doc.exists){
+            if (doc.exists) {
                 res.send({id: doc.id, ...doc.data()})
-            }else {
+            } else {
                 throw new NotFoundError("Usuario não encontrado")
             }
-        }catch (error) {
+        } catch (error) {
             next(error);
         }
     }
 
-    static change(req: Request, res: Response, next: NextFunction){
+    static async update(req: Request, res: Response, next: NextFunction) {
         try {
             let userId: string = req.params.id;
             let user = req.body as User;
-            getFirestore().collection('users').doc(userId).set({
-                name: user.name,
-                email: user.email
-            });
-            res.send({
-                message: `usuario alterado ${user.name}`
-            });
-        }catch (error) {
+            let docRef = getFirestore().collection('users').doc(userId);
+            if ((await docRef.get()).exists) {
+                await docRef.set({
+                    name: user.name,
+                    email: user.email
+                });
+                res.send({
+                    message: `usuario alterado ${user.name}`
+                });
+            } else {
+                throw new NotFoundError("Usuario Nao existe")
+            }
+        } catch (error) {
             next(error);
         }
     }
 
     static async save(req: Request, res: Response, next: NextFunction): Promise<void> {
-      try {
-          let user = req.body;
-          if (!user.email || user.email.length === 0) {
-              throw new ValidationError("Email obrigatorio   !")
-          }
-          const userSave = await getFirestore().collection('users').add(user)
-          res.status(201).send({
-              message: `Usuario ${userSave.id}criado com sucesso`
-          });
-      }catch (error) {
-          next(error);
-      }
+        try {
+            let user = req.body;
+            if (!user.email || user.email.length === 0) {
+                throw new ValidationError("Email obrigatorio   !")
+            }
+            const userSave = await getFirestore().collection('users').add(user)
+            res.status(201).send({
+                message: `Usuario ${userSave.id}criado com sucesso`
+            });
+        } catch (error) {
+            next(error);
+        }
     }
 
     static delete(req: Request, res: Response, next: NextFunction): void {
@@ -72,7 +77,7 @@ export class UsersController {
             let userId: string = req.params.id;
             getFirestore().collection('users').doc(userId).delete();
             res.status(204).end();
-        }catch (error) {
+        } catch (error) {
             next(error);
         }
     }
